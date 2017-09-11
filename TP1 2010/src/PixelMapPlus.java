@@ -220,7 +220,17 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void translate(int rowOffset, int colOffset)
 	{
-		// compl�ter
+		// compl�ter   // Il manque remplissage blanc : si decalage de x ligne et de y colonnes : 4 cas possible en fonction de leurs signes????
+		for(int i = 0 ; i<this.getHeigth(); i++)
+		{
+			for (int j = 0 ; j < this.getHeigth(); j++)
+			{
+				if(this.getHeigth()>rowOffset*i && this.getWidth()> colOffset*j)
+					{
+						imageData[i][j]= imageData[rowOffset*i][colOffset*j]
+					}
+			}
+		}
 
 	}
 
@@ -262,7 +272,14 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	}
 
 	public void inverser() {
-		// compl�ter
+		// compl�ter - fait
+		for(int i = 0 ; i<this.getHeigth() ; i++)
+		{
+			for(int j = 0 ; j< this.getWidth(); j++)
+			{
+				imageData[i][j]= imageData[this.getHeigth()-i][this.getWidth()-j]
+			}
+		}
 
 	}
 }
