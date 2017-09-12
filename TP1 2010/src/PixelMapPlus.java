@@ -130,7 +130,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 * dans le sens des aiguilles d'une montre (clockWise == true)
 	 * ou dans le sens inverse des aiguilles d'une montre (clockWise == false).
 	 * Les pixels vides sont blancs.
-	 * @param clockWise : Direction de la rotation
+	 * @param clockWise : Direction de la rotation[i][j] = tableauTemp[i][
 	 */
 	public void rotate(int x, int y, double angleRadian)
 	{
@@ -158,7 +158,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	/**
 	 * Modifie la longueur et la largeur de l'image
 	 * @param w : nouvelle largeur
-	 * @param h : nouvelle hauteur
+	 * @param h : nouvelle hauteur[i][j] = tableauTemp[i][
 	 */
 	public void resize(int w, int h) throws IllegalArgumentException
 	{
@@ -193,14 +193,9 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void crop(int h, int w)
 	{
 		// compl�ter
-		AbstractPixel[][] tableauTemp = new AbstractPixel[height][width];
-		for(int i = 0; i < height, i++) {
-			for(int j = 0; j < width, j++) {
-
-				tableauTemp[i][j] = imageData[i][j];
-
-			}
-		}
+		AbstractPixel[][] tableauTemp;
+		
+        tableauTemp= imageData;
 		int tempHeight = height;
 		int tempWidth = width;
 		clearData();
@@ -221,17 +216,20 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	public void translate(int rowOffset, int colOffset)
 	{
 		// compl�ter   // Il manque remplissage blanc : si decalage de x ligne et de y colonnes : 4 cas possible en fonction de leurs signes????
+		AbstractPixel[][] tableauTemp;
 		for(int i = 0 ; i<this.getHeigth(); i++)
 		{
 			for (int j = 0 ; j < this.getHeigth(); j++)
 			{
 				if(this.getHeigth()>rowOffset*i && this.getWidth()> colOffset*j)
 					{
-						imageData[i][j]= imageData[rowOffset*i][colOffset*j]
+						imageData[i][j]= imageData[rowOffset*i][colOffset*j];
 					}
 			}
 		}
-
+        clearData();
+        AllocateMemory(imageType,this.getHeigt(),this.getwidth());
+        imagedata=tableauTemp;
 	}
 
 	/**
@@ -242,8 +240,19 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 	 */
 	public void zoomIn(int x, int y, double zoomFactor) throws IllegalArgumentException
 	{
+        int heightZoom = (int)(this.getHeight()/zoomFactor);
+        int widthZoom = (int)(this.getWidth()/zoomFactor);
+        AbstractPixel[][] tableauTemp = new AbstractPixel[heightZoom][widthZoom];
 		if(zoomFactor < 1.0)
 			throw new IllegalArgumentException();
+		for(int i= x - heightZoom/2; i < x + heightZoom/2; i++ )
+        {
+            for(int j = y - widthZoom/2; i < y + widthZoom/2; j++ )
+            {
+                tableauTemp[i - (x - heightZoom/2) ][j - (y - widthZoom/2)] = imagedata[i][j];
+            }
+        }
+       
 
 		// compl�ter
 
@@ -264,8 +273,8 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		{
 			for (int j = 0 ; j<this.getWidth(); j++)
 			{
-				if(this.getPixel()>=min && this.getPixel()<=max)
-					this.getPixel()=newPixel;
+				if(this.imageData[i][j].compareTo(min) > 0 && this.imageData[i][j].compareTo(max) < 0 )
+                this.imageData[i][j]=newPixel;
 			}
 		}
 
