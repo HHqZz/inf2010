@@ -1,11 +1,16 @@
+/*************************************************************
+* Titre: Travail pratique #1 - INF2010
+* Date:  18 Septembre 2017
+* Auteur : Constantin Bouis 1783438 et Axel Templier 1837967
+**************************************************************/
 
-public class Main 
+public class Main
 {
 	/**
 	 * Fonction principale
 	 * @param args (non utilise)
 	 */
-	public static void main(String[] args) 
+	public static void main(String[] args)
 	{
 		/**
 		 * Exercice 1
@@ -32,10 +37,10 @@ public class Main
 		wName = "Edsger Dijkstra (Transparent)";
 		new DisplayImageWindow(wName, pmt, 200, 200);
 
-		/**
-		 * Exercice 2
 
-		
+		 // Exercice 2
+
+
 		PixelMapPlus pmp = new PixelMapPlus("./src/ed.ppm");
 
 		PixelMapPlus hpmp = new PixelMapPlus( pmp );
@@ -55,7 +60,7 @@ public class Main
 		newColors[2] = 255;
 		hpmp.replaceColor(new ColorPixel(tMin), new ColorPixel(tMax), new ColorPixel(newColors));
 
-		
+
 		PixelMapPlus gpmp = new PixelMapPlus( pmp );
 		gpmp.zoomIn(0, gpmp.height, 2);
 		gpmp.resize(gpmp.width/2, gpmp.height/2);
@@ -66,7 +71,7 @@ public class Main
 		bwpmp.zoomIn(pmp.getWidth(), 0, 2);
 		bwpmp.resize(bwpmp.width/2, bwpmp.height/2);
 		bwpmp.convertToBWImage();
-		
+
 
 		PixelMapPlus npmp = new PixelMapPlus( pmp );
 		npmp.zoomIn(npmp.getWidth(), npmp.getHeight(), 2);
@@ -78,10 +83,10 @@ public class Main
 		pmp.inset(bwpmp, 0, pmp.getWidth()/2);
 		pmp.inset(npmp, pmp.getHeight()/2, pmp.getWidth()/2);
 		pmp.inverser();
-		
+
 		wName = "Edsger Dijkstra";
 		new DisplayImageWindow(wName, pmp);
-		 */
+
 	}
 
 }
