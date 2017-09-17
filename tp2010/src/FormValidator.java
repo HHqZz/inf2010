@@ -129,14 +129,14 @@ public class FormValidator
 	{
 		if (length > 10) return null;
 		char[] charKey = new char[ length ];
-		Random generator = new Random( System.nanoTime() );
+		Random rand = new Random( System.nanoTime() );
 
 		for(int i = 0 ; i < length ; i++)
 		{
 			int  n = rand.nextInt(26) + 1;	// 26 en maximum pour les 26 lettres de l'alphabet
 			charKey[i] = (char)(n + 64); 	// 64 car A est a la 65ieme position dans la table ASCII
-			return String.valueOf(charKey);
 		}
+		return String.valueOf(charKey);
 	}
 
 	/**
@@ -147,7 +147,7 @@ public class FormValidator
 	{
 		if (nb > 10) return null;
 		int[] charTransform = new int[ nb ];
-		Random generator = new Random( System.nanoTime() );
+		Random rand = new Random( System.nanoTime() );
 		for (int i = 0 ; i<nb ; i++ )
 		{
 			int  n = rand.nextInt(9);		// On genere un nb aleatoire entre 0 et 9

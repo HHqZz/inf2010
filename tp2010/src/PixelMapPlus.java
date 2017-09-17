@@ -144,19 +144,20 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			for (int j = 0; j < this.width; j++)
 			{
 				// On effectue le calcul de la rotation
-				int xAncien = (int) (i * cosTheta + j * sinTheta - cosTheta * x - sinTheta * y + x);
-				int yAncien = (int) (i * -sinTheta + j * cosTheta + sinTheta * x - cosTheta * y + y);
+				int xNew = (int) (i * cosTheta - j * sinTheta - cosTheta * x + sinTheta * y + x);
+				int yNew = (int) (i * sinTheta + j * cosTheta - sinTheta * x - cosTheta * y + y);
 
 				// On cree un pixel blanc
 				AbstractPixel tempPixel = new BWPixel();
 
 				// Si les coordonnees sont  dans l'interval alors on met le pixel dans le tableau temporaire
 				// Sinon on met un Pixel blanc a la place.
-				if (xAncien >= 0 && xAncien < this.height && yAncien >= 0 && yAncien < this.width)
+				if (xNew >= 0 && xNew < this.height && yNew >= 0 && yNew < this.width)
 				 {
-					tableauTemp[i][j] = imageData[xAncien][yAncien];
+					tableauTemp[i][j] = imageData[xNew][yNew];
 				 }
-				tableauTemp[i][j] = tempPixel;
+				else
+					tableauTemp[i][j] = tempPixel;
 			}
 		}
 		// On copie le tableau temporaire dans le tableau d'origine
