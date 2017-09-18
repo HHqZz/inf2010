@@ -86,11 +86,12 @@ public class ColorPixel extends AbstractPixel
 	 */
 	public AbstractPixel Negative()
 	{
-		this.rgb[0] = 255-this.rgb[0];
-		this.rgb[1] = 255-this.rgb[1];
-		this.rgb[2] = 255-this.rgb[2];
+		int[] temp = new int[3];
+		temp[0] = 255-this.rgb[0];
+		temp[1] = 255-this.rgb[1];
+		temp[2] = 255-this.rgb[2];
 
-		return new ColorPixel(this.rgb);
+		return new ColorPixel(temp);
 	}
 
 	public void setAlpha(int alpha)
