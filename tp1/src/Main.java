@@ -13,11 +13,20 @@ public class Main
 	public static void main(String[] args)
 	{
 
+		//TEST
+		PixelMapPlus pmTest = new PixelMapPlus("./src/ed.ppm");
+		new DisplayImageWindow("Test Normal", pmTest, 50, 50);
+		pmTest.rotate(pmTest.height / 2, pmTest.width / 2, Math.PI/4);
+		pmTest.negate();
+		//pmTest.resize(pmTest.width, pmTest.height);
+		//pmTest.convertToGrayImage();
+		new DisplayImageWindow("Test BW", pmTest, 800, 50);
 
 		/**
 		 * Exercice 1
 		 */
 
+/*
 		PixelMap pmc = new PixelMap("./src/ed.ppm");
 		PixelMap pmg = pmc.toGrayImage();
 		PixelMap pmb = pmc.toBWImage();
@@ -87,7 +96,7 @@ public class Main
 
 		wName = "Edsger Dijkstra";
 		new DisplayImageWindow(wName, pmp);
-
+*/
 	}
 
 }

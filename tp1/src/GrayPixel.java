@@ -93,7 +93,7 @@ public class GrayPixel  extends AbstractPixel
 	 */
 	public AbstractPixel Negative()
 	{
-    return new GrayPixel(this.pixel -= 255);
+    return new GrayPixel(this.pixel - 255);
 	}
 
 	public void setAlpha(int alpha)

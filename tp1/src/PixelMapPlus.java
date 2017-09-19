@@ -62,7 +62,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 		{
 			for (int j = 0;  j < this.getWidth(); j++)
 			{
-				imageData[i][j]= this.imageData[i][j].Negative();
+				this.imageData[i][j]= this.imageData[i][j].Negative();
 			}
 		}
 	}
@@ -148,14 +148,12 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 				int yNew = (int) (i * sinTheta + j * cosTheta - sinTheta * x - cosTheta * y + y);
 
 				// On cree un pixel blanc
-				AbstractPixel tempPixel = new BWPixel();
+				AbstractPixel tempPixel = new BWPixel(true);
 
 				// Si les coordonnees sont  dans l'interval alors on met le pixel dans le tableau temporaire
 				// Sinon on met un Pixel blanc a la place.
 				if (xNew >= 0 && xNew < this.height && yNew >= 0 && yNew < this.width)
-				 {
-					tableauTemp[i][j] = imageData[xNew][yNew];
-				 }
+					tableauTemp[i][j] = this.imageData[xNew][yNew];
 				else
 					tableauTemp[i][j] = tempPixel;
 			}
