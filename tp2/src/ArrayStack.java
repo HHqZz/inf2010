@@ -1,6 +1,6 @@
 import java.util.EmptyStackException;
 
-/*public class ArrayStack<AnyType>
+public class ArrayStack<AnyType>
 {
     private static final int INITIAL_SIZE = 10;
     private static final int DEFAULT_RESIZE_FACTOR = 2;
@@ -11,14 +11,20 @@ import java.util.EmptyStackException;
     // Initialisation de la pile.
     public ArrayStack()
     {
-        // À compléter
+        table = (AnyType[]) new Object[INITIAL_SIZE];
     }
 
     // Enlève l'élément au sommet de la pile et le renvoie.
     // Complexité asymptotique: O(1)
     public AnyType pop() throws EmptyStackException
     {
-        // À compléter
+        if(empty())
+            throw new EmptyStackException() ;
+
+        AnyType elePop = table[size-1] ;    // copie de lelement a pop
+        table[size -1] = null ;             // suppression de l element a pop
+        size= size -1 ;                          // reduit nombre d element
+        return elePop ;                  // return element a pop
     }
 
     // Ajoute un élément au sommet de la pile.
@@ -26,7 +32,11 @@ import java.util.EmptyStackException;
     // Complexité asymptotique: O(1) (O(N) lorsqu'un redimensionnement est nécessaire)
     public void push(AnyType element)
     {
-        // À compléter
+        if(size == table.length )   // Si tableau plein ou null
+            resize(DEFAULT_RESIZE_FACTOR) ;
+
+        table[size] = element ; // on met lelement a la fin du tableau
+        size = size +1 ;  // incremente nombre delement
     }
 
     // Renvoie l'élément au sommet de la pile sans l'enlever.
@@ -34,7 +44,10 @@ import java.util.EmptyStackException;
     // Complexité asymptotique: O(1)
     public AnyType peek()
     {
-        // À compléter
+        if(empty())
+            return null;
+
+       return table[size-1] ;
     }
 
     // Renvoie le nombre d'éléments dans la pile.
@@ -48,7 +61,10 @@ import java.util.EmptyStackException;
     @SuppressWarnings("unchecked")
     private void resize(int resizeFactor)
     {
-        // À compléter
+        int ancienneSize = table.length ;  // stocke ancienne taille
+       AnyType[] temp = table ;             // recopie ancien tableau
+        table = (AnyType[]) new Object[ancienneSize*resizeFactor];  // cree nouveau tableau avec nouvelle taille
+       System.arraycopy(temp,0,table,0,ancienneSize); // recopie tableau temporaire dans le nouveau tableau
+
     }
 }
-*/

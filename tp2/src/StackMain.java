@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @author maitr
  */
-/*public class StackMain
+public class StackMain
 {
     final static int COUNT = 1013;
 
@@ -84,10 +84,22 @@ import java.util.logging.Logger;
         String output = "";
 
         ArrayStack<String> stack = new ArrayStack<>();
-         // À compléter
-		 
-        return output;
+
+            for(int i =0 ; i< words.length ; i++) {
+                stack.push(words[i]);
+            }
+
+            for (int i = 0; i < words.length; i++) {
+                if (i == 0)
+                    output = output + stack.pop();
+                else
+                    output = output + " " + stack.pop();
+            }
+            return output;
     }
 
+		 
+
+
+
 }
-*/

@@ -1,6 +1,6 @@
 import java.io.*;
 
-/*public class PostfixSolverMain
+public class PostfixSolverMain
 {
 	public static void main(String[] args) throws IOException 
 	{
@@ -55,9 +55,29 @@ import java.io.*;
         // À compléter
         ArrayStack<Boolean> stack = new ArrayStack<>();
         //L'expression est séparée en tokens selon les espaces.
+         boolean andSolve = true ;
         for (String token : input.split("\\s")) {
-        }
 
+            if (token == "and") {
+                if (stack.pop().equals(1) && stack.pop().equals(1))
+                    stack.push(true);
+                else stack.push(false);
+            }
+
+            if (token == "or") {
+                if (stack.pop().equals(0) && stack.pop().equals(0))
+                    stack.push(false);
+                else stack.push(true);
+            }
+
+            if (token == "not") {
+                if (stack.pop().equals(1))
+                    stack.push(false);
+                else stack.push(true);
+            }
+            if(token != "and" && token != "or" && token != "not" )
+                throw new ParsingErrorException() ;
+        }
+        return stack.peek() ;
     }
 }
-*/
