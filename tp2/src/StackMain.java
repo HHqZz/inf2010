@@ -1,4 +1,3 @@
-
 import java.util.EmptyStackException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -97,9 +96,5 @@ public class StackMain
             }
             return output;
     }
-
-		 
-
-
 
 }

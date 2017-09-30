@@ -81,3 +81,26 @@ public class PostfixSolverMain
         return stack.peek() ;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

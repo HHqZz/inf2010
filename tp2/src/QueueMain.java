@@ -1,4 +1,4 @@
-/*public class QueueMain
+public class QueueMain
 {
 	final static int COUNT = 1013;
 	
@@ -48,7 +48,7 @@
 		}
 		
 		if(!stackQueue.empty()) {
-			Systemack=new Node<AnyType>();eAt(.out.println("Erreur: la file devrait être vide, mais elle ne l'est pas.");
+			System.out.println("Erreur: la file devrait être vide, mais elle ne l'est pas.");
 			return;
 		}
 		
@@ -67,4 +67,3 @@
 		System.out.print("StackQueue: It's all good!");
 	}
 }
-*/
