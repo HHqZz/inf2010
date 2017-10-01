@@ -1,5 +1,3 @@
-import org.omg.CORBA.Any;
-
 public class DoublyLinkedList<AnyType>
 {
     // Un noeud de la liste.
@@ -58,11 +56,9 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public AnyType peekBack()
     {
-
-        if (empty())
-            return null;
-        else
-            return back.getValue();
+    	if(empty())
+        	return null;
+        return back.getValue();
     }
 
     // Retourne l'élément au début de la liste.
@@ -70,115 +66,98 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public AnyType peekFront()
     {
-
-        if (empty())
-            return null;
-        else
-            return front.getValue();
+        if(empty())
+        	return null;
+        return front.getValue();
     }
 
     // Retourne le noeud à l'indice donné.
     // Complexité asymptotique: O(n)
     private Node<AnyType> getNodeAt(int index)
     {
-       //On cree une valeur de parcours qui commence au debut de la liste
-        Node<AnyType> valeurParcour= front;
-        //On parcourt le tableau jusqu'a l'index demande
-       for(int i=0 ; i <index ; i++ ){
-           // on verifie si notre valeur de parcours n'est pas le dernier noeud de la liste
-           if(valeurParcour == back)
-                return null;
-           //SI ce n'est pas le dernier noeud on passe au prochain
-         Node tempNode =  valeurParcour.getNext();
-         valeurParcour= tempNode ;
-         // Si on est a l'index alors on return le noeud
-            if (i == index)
-                return valeurParcour;
-        }
-        return null ;
+        Node<AnyType> temporaire = front;
+        for (int i = 0; i < index; i++) 
+        	temporaire = temporaire.getNext();
+        return temporaire;
     }
 
     // Retourne l'élément à l'indice donné.
     // Complexité asymptotique: O(n)
     public AnyType getAt(int index) throws IndexOutOfBoundsException
     {
-        // On verifie si l'index est dans la liste
-        if (index < 0 || index > size())
-            throw new IndexOutOfBoundsException();
-        // On retourne l'element a l'indice donne
-        return this.getNodeAt(index).getValue();
+        if (index < 0 || index >= size())
+        	throw new IndexOutOfBoundsException();
+        return getNodeAt(index).getValue();
     }
 
     // Retire l'élément à la fin de la liste.
     // Complexité asymptotique: O(1)
     public void popBack() throws EmptyListException
     {
-        //On verifie si la pile est vide
-        if (empty())
-            throw new EmptyListException();
-
-        // Retire l'élément à la fin de la liste.
-        if(back.getPrev()!=null)
-        {
-            back = back.getPrev();
-            back.setNext(null);
-            size--;
-        }
-
+        if (empty())  
+        	throw new EmptyListException();
+        
+        if (size() > 1) 
+        	back = back.getPrev();
+        back.setNext(null);
+        size--;
     }
 
     // Retire l'élément au début de la liste.
     // Complexité asymptotique: O(1)
     public void popFront() throws EmptyListException
     {
-
-        //On verifie si la pile est vide
-        if (empty())
-            throw new EmptyListException();
-
-
-        // Retire l'élément au début de la liste.
-        if(front.getNext() != null )
-        {
-            front.getNext().setPrev(null);
-            front = front.getNext();
-            size--;
-        }
-
+    	if (empty())  
+        	throw new EmptyListException();
+    	
+    	if (size() > 1) 
+        	front = front.getNext();
+        front.setPrev(null);
+        size--;
+    	
     }
 
     // Retire l'élément à l'indice donné.
     // Complexité asymptotique: O(n)
-    public void removeAt (int index) throws IndexOutOfBoundsException
+    public void removeAt(int index) throws IndexOutOfBoundsException
     {
-        // On verifie si l'index est dans la liste
-        if (index < 0 || index > size())
-           throw  new IndexOutOfBoundsException();
+    	
+            if(index < 0 || index >= this.size())
+                throw new IndexOutOfBoundsException();
 
-        if (getNodeAt(index).getNext() != null )
-        {
-            getNodeAt(index).getNext().setPrev(getNodeAt(index-1));
-        }
+            Node<AnyType> temporaire = getNodeAt(index);
 
-        if(getNodeAt(index).getPrev() != null)
-        {
-            getNodeAt(index).getPrev().setNext(getNodeAt(index+1));
+            if(temporaire != back)
+            	temporaire.getNext().setPrev(temporaire.getPrev());
+            else {
+                if(size() > 1)                         
+                    back = back.getPrev();  
+                back.setNext(null);               
+            }
 
-        }
-        if(getNodeAt(index).getNext()== null && getNodeAt(index).getPrev()==null)
-        {
-            getNodeAt(index).setPrev(null);
-            getNodeAt(index).setNext(null);
-        }
-        size--;
+            if(temporaire != front)
+            	temporaire.getPrev().setNext(temporaire.getNext());
+            else {
+                if(size() > 1)                        
+                    front = front.getNext();  
+                front.setPrev(null);               
+            }
+
+            this.size--;
+    
     }
 
     // Ajoute un élément à la fin de la liste.
     // Complexité asymptotique: O(1)
     public void pushBack(AnyType item)
     {
-        Node <AnyType> newNode = new Node(item,back,null);
-        back= newNode;
+    	Node <AnyType> newNode = new Node<AnyType>(item,back,null);
+        back= newNode ;
+        if(empty())
+        	front = newNode;
+        else
+        	back.getPrev().setNext(back);
+        	
         size++;
     }
 
@@ -186,22 +165,33 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public void pushFront(AnyType item)
     {
-        Node <AnyType> newNode = new Node(item,null,front);
+    	Node <AnyType> newNode = new Node<AnyType>(item,null,front);
         front= newNode ;
+        if (empty())
+        	back = newNode;
+        else
+        	front.getNext().setPrev(front);
+        	
         size++;
-
     }
 
     // Ajoute un élément à l'indice donné.
     // Complexité asymtotique: O(n)
     public void insertAt(AnyType item, int index) throws IndexOutOfBoundsException
     {
-        if (index < 0 || index > size())
+    	if(index < 0 || index >= this.size())
             throw new IndexOutOfBoundsException();
 
-        Node<AnyType> newNode = new Node(item,null,null);
-        getNodeAt(index).setPrev(newNode);
-        getNodeAt(index-1).setNext(newNode);
-        size++;
+        if(index == 0)
+            pushFront(item);                
+        else if(index == this.size())
+            pushBack(item);                 
+        else {                              
+            Node<AnyType> temporaire = getNodeAt(index);
+            Node<AnyType> newNode = new Node<AnyType>(item, temporaire.prev, temporaire);
+            newNode.getPrev().setNext(newNode);
+            newNode.getNext().setPrev(newNode);
+            size++;
+        }
     }
 }
