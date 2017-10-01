@@ -1,8 +1,13 @@
 import java.io.*;
+/*************************************************************
+* Titre: Travail pratique #2 - INF2010
+* Date:  2 Octobre 2017
+* Auteur : Constantin Bouis 1783438 et Axel Templier 1837967
+**************************************************************/
 
 public class PostfixSolverMain
 {
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args) throws IOException
 	{
         String s1 = "0 1 or";
         String s2 = "0 0 or";
@@ -49,35 +54,39 @@ public class PostfixSolverMain
 
         System.out.print("PostfixSolver: It's all good");
      }
-	 
+
+	/*
+	* Methode permettant de resoudre une equation postfixe de type booleenne
+	*	Capable de traiter les portes AND, OR, NOT
+	*/
 	 public static boolean solve(String input) throws ParsingErrorException
      {
-        // À compléter
+
         ArrayStack<Boolean> stack = new ArrayStack<>();
         //L'expression est séparée en tokens selon les espaces.
          boolean andSolve = true ;
         for (String token : input.split("\\s")) {
 
-            if (token == "and") {
-                if (stack.pop().equals(1) && stack.pop().equals(1))
-                    stack.push(true);
-                else stack.push(false);
+            if (token == "and") {		// Cas AND
+                if (stack.pop().equals(1) && stack.pop().equals(1))	// Si les deux elements sur le stack sont 1
+                    stack.push(true);	// return true care 1 AND 1 = true
+                else stack.push(false);	// Sinon false car il y aura au moins un 0.
             }
 
-            if (token == "or") {
-                if (stack.pop().equals(0) && stack.pop().equals(0))
-                    stack.push(false);
-                else stack.push(true);
+            if (token == "or") {	// Cas OR
+                if (stack.pop().equals(0) && stack.pop().equals(0))	// Si les deux elements du dessus sont 0
+                    stack.push(false);	// Alors return false car 0 OR 0 donne 0
+                else stack.push(true);	// Le reste des cas donnent 1
             }
 
-            if (token == "not") {
-                if (stack.pop().equals(1))
-                    stack.push(false);
-                else stack.push(true);
+            if (token == "not") {  // Cas NOT
+                if (stack.pop().equals(1)) //Si lelement du dessus est 1
+                    stack.push(false);	// On return linverse de 1 donc 0
+                else stack.push(true);		// Sinon on return 1
             }
-            if(token != "and" && token != "or" && token != "not" )
+            if(token != "and" && token != "or" && token != "not" )		// Autres cas, retournant une erreur
                 throw new ParsingErrorException() ;
         }
-        return stack.peek() ;
+        return stack.peek() ;			// On return lelement du dessus de la pile
     }
 }

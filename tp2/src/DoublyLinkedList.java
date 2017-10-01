@@ -1,3 +1,9 @@
+/*************************************************************
+* Titre: Travail pratique #2 - INF2010
+* Date:  2 Octobre 2017
+* Auteur : Constantin Bouis 1783438 et Axel Templier 1837967
+**************************************************************/
+
 public class DoublyLinkedList<AnyType>
 {
     // Un noeud de la liste.
@@ -76,7 +82,7 @@ public class DoublyLinkedList<AnyType>
     private Node<AnyType> getNodeAt(int index)
     {
         Node<AnyType> temporaire = front;
-        for (int i = 0; i < index; i++) 
+        for (int i = 0; i < index; i++)
         	temporaire = temporaire.getNext();
         return temporaire;
     }
@@ -94,10 +100,10 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public void popBack() throws EmptyListException
     {
-        if (empty())  
+        if (empty())
         	throw new EmptyListException();
-        
-        if (size() > 1) 
+
+        if (size() > 1)
         	back = back.getPrev();
         back.setNext(null);
         size--;
@@ -107,21 +113,21 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public void popFront() throws EmptyListException
     {
-    	if (empty())  
+    	if (empty())
         	throw new EmptyListException();
-    	
-    	if (size() > 1) 
+
+    	if (size() > 1)
         	front = front.getNext();
         front.setPrev(null);
         size--;
-    	
+
     }
 
     // Retire l'élément à l'indice donné.
     // Complexité asymptotique: O(n)
     public void removeAt(int index) throws IndexOutOfBoundsException
     {
-    	
+
             if(index < 0 || index >= this.size())
                 throw new IndexOutOfBoundsException();
 
@@ -130,21 +136,21 @@ public class DoublyLinkedList<AnyType>
             if(temporaire != back)
             	temporaire.getNext().setPrev(temporaire.getPrev());
             else {
-                if(size() > 1)                         
-                    back = back.getPrev();  
-                back.setNext(null);               
+                if(size() > 1)
+                    back = back.getPrev();
+                back.setNext(null);
             }
 
             if(temporaire != front)
             	temporaire.getPrev().setNext(temporaire.getNext());
             else {
-                if(size() > 1)                        
-                    front = front.getNext();  
-                front.setPrev(null);               
+                if(size() > 1)
+                    front = front.getNext();
+                front.setPrev(null);
             }
 
             this.size--;
-    
+
     }
 
     // Ajoute un élément à la fin de la liste.
@@ -157,7 +163,7 @@ public class DoublyLinkedList<AnyType>
         	front = newNode;
         else
         	back.getPrev().setNext(back);
-        	
+
         size++;
     }
 
@@ -171,7 +177,7 @@ public class DoublyLinkedList<AnyType>
         	back = newNode;
         else
         	front.getNext().setPrev(front);
-        	
+
         size++;
     }
 
@@ -183,10 +189,10 @@ public class DoublyLinkedList<AnyType>
             throw new IndexOutOfBoundsException();
 
         if(index == 0)
-            pushFront(item);                
+            pushFront(item);
         else if(index == this.size())
-            pushBack(item);                 
-        else {                              
+            pushBack(item);
+        else {
             Node<AnyType> temporaire = getNodeAt(index);
             Node<AnyType> newNode = new Node<AnyType>(item, temporaire.prev, temporaire);
             newNode.getPrev().setNext(newNode);
