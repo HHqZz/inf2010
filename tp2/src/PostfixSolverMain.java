@@ -59,34 +59,41 @@ public class PostfixSolverMain
 	* Methode permettant de resoudre une equation postfixe de type booleenne
 	*	Capable de traiter les portes AND, OR, NOT
 	*/
-	 public static boolean solve(String input) throws ParsingErrorException
-     {
-
-        ArrayStack<Boolean> stack = new ArrayStack<>();
+    public static boolean solve(String input) throws ParsingErrorException
+    {
+        // À compléter
+        ArrayStack<Boolean> stack = new ArrayStack<Boolean>();
         //L'expression est séparée en tokens selon les espaces.
-         boolean andSolve = true ;
+        boolean andSolve = true ;
         for (String token : input.split("\\s")) {
 
-            if (token == "and") {		// Cas AND
-                if (stack.pop().equals(1) && stack.pop().equals(1))	// Si les deux elements sur le stack sont 1
-                    stack.push(true);	// return true care 1 AND 1 = true
-                else stack.push(false);	// Sinon false car il y aura au moins un 0.
+            if (token.equals("and")) {
+                if (stack.pop().equals(true) && stack.pop().equals(true))
+                    stack.push(true);
+                else stack.push(false);
             }
 
-            if (token == "or") {	// Cas OR
-                if (stack.pop().equals(0) && stack.pop().equals(0))	// Si les deux elements du dessus sont 0
-                    stack.push(false);	// Alors return false car 0 OR 0 donne 0
-                else stack.push(true);	// Le reste des cas donnent 1
+            if (token.equals("or")) {
+                if (stack.pop().equals(true) || stack.pop().equals(true))
+                    stack.push(true);
+                else stack.push(false);
             }
 
-            if (token == "not") {  // Cas NOT
-                if (stack.pop().equals(1)) //Si lelement du dessus est 1
-                    stack.push(false);	// On return linverse de 1 donc 0
-                else stack.push(true);		// Sinon on return 1
+            if (token.equals("not")) {
+                if (stack.pop().equals(true))
+                    stack.push(false);
+                else
+                    stack.push(true);
             }
-            if(token != "and" && token != "or" && token != "not" )		// Autres cas, retournant une erreur
-                throw new ParsingErrorException() ;
+
+            if (token.equals("1"))
+                stack.push(true);
+
+            if (token.equals("0"))
+                stack.push(false);
+
+
         }
-        return stack.peek() ;			// On return lelement du dessus de la pile
+        return stack.peek() ;
     }
 }
