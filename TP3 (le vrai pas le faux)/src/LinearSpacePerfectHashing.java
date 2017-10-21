@@ -100,7 +100,7 @@ public class LinearSpacePerfectHashing<AnyType>
 
 	}
 	
-	public void remove (AnyType x) {
+	public void remove (AnyType x) { // A REVOIR
 
 		int m = data.length;
 		int index = ((a*x.hashCode()+b)%p)%m;
