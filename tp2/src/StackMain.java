@@ -84,17 +84,24 @@ public class StackMain
 
         ArrayStack<String> stack = new ArrayStack<>();
 
-            for(int i =0 ; i< words.length ; i++) {
+            // On push chaque lettre dans le stack
+            for(int i =0 ; i< words.length ; i++)
+             {
                 stack.push(words[i]);
-            }
+             }
 
-            for (int i = 0; i < words.length; i++) {
-                if (i == 0)
-                    output = output + stack.pop();
-                else
-                    output = output + " " + stack.pop();
-            }
-            return output;
+            for (int i = 0; i < words.length; i++)
+             {    // Pour chacune des lettres
+                if (i == 0)                             // Si on est sur le premier mot
+                    output = output + stack.pop();      // La phrase inversee prend le dernier mot de la phrase ET le retire de la pile
+                else                                    // Sinon
+                    output = output + " " + stack.pop(); // La phrase inversee prend un espace puis le dernier mot sur la pile
+             }
+            return output;      // On retourne la phrase inversee
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
 }
+// end

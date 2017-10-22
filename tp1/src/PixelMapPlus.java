@@ -223,7 +223,7 @@ public class PixelMapPlus extends PixelMap implements ImageOperations
 			for(int j = 0; (j + col0) < width && j < pm.width; j++)
 			{
 				// On insert le pixel pm a l'endroit voulu
-				imageData[i + row0][j + col0] = pm.imageData[i][j];
+				imageData[i + row0][j + col0] = new GrayPixel();
 			}
 		}
 	}

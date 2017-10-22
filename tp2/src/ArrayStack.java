@@ -1,4 +1,9 @@
 import java.util.EmptyStackException;
+/*************************************************************
+* Titre: Travail pratique #2 - INF2010
+* Date:  2 Octobre 2017
+* Auteur : Constantin Bouis 1783438 et Axel Templier 1837967
+**************************************************************/
 
 public class ArrayStack<AnyType>
 {
@@ -8,14 +13,19 @@ public class ArrayStack<AnyType>
     private int size = 0; // Nombre d'éléments dans la pile.
     private AnyType[] table;
 
-    // Initialisation de la pile.
+  /**
+	*	Initialise la pile
+	*	a la taille INITIAL_SIZE
+	*/
     public ArrayStack()
     {
         table = (AnyType[]) new Object[INITIAL_SIZE];
     }
 
-    // Enlève l'élément au sommet de la pile et le renvoie.
-    // Complexité asymptotique: O(1)
+    /*
+    * Enlève l'élément au sommet de la pile et le renvoie.
+    * Complexité asymptotique: O(1)
+    */
     public AnyType pop() throws EmptyStackException
     {
         if(empty())
@@ -27,9 +37,12 @@ public class ArrayStack<AnyType>
         return elePop ;                  // return element a pop
     }
 
-    // Ajoute un élément au sommet de la pile.
-    // Augmente la taille de la pile si nécessaire (utiliser la fonction resize définie plus bas).
-    // Complexité asymptotique: O(1) (O(N) lorsqu'un redimensionnement est nécessaire)
+
+    /*
+    * Ajoute un élément au sommet de la pile.
+    * Augmente la taille de la pile si nécessaire (utiliser la fonction resize définie plus bas).
+    * Complexité asymptotique: O(1) (O(N) lorsqu'un redimensionnement est nécessaire)
+    */
     public void push(AnyType element)
     {
         if(size == table.length )   // Si tableau plein ou null
@@ -39,15 +52,18 @@ public class ArrayStack<AnyType>
         size = size +1 ;  // incremente nombre delement
     }
 
-    // Renvoie l'élément au sommet de la pile sans l'enlever.
-    // Retourne null si la pile est vide.
-    // Complexité asymptotique: O(1)
+
+    /*
+    * Renvoie l'élément au sommet de la pile sans l'enlever.
+    * Retourne null si la pile est vide.
+    * Complexité asymptotique: O(1)
+    */
     public AnyType peek()
     {
-        if(empty())
+        if(empty())       // Si la pile est vide
             return null;
 
-       return table[size-1] ;
+       return table[size-1] ;   // On retourner le dernier element de la pile
     }
 
     // Renvoie le nombre d'éléments dans la pile.
@@ -56,8 +72,10 @@ public class ArrayStack<AnyType>
     // Indique si la pile est vide.
     public boolean empty() { return size == 0; }
 
-    // Redimensionne la pile. La capacité est multipliée par un facteur de resizeFactor.
-    // Complexité asymptotique: O(N)
+    /*
+    * Redimensionne la pile. La capacité est multipliée par un facteur de resizeFactor.
+    * Complexité asymptotique: O(N)
+    */
     @SuppressWarnings("unchecked")
     private void resize(int resizeFactor)
     {
@@ -67,4 +85,9 @@ public class ArrayStack<AnyType>
        System.arraycopy(temp,0,table,0,ancienneSize); // recopie tableau temporaire dans le nouveau tableau
 
     }
+<<<<<<< HEAD
 }
+=======
+}
+// end
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e

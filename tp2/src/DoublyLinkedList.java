@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+=======
+/*************************************************************
+* Titre: Travail pratique #2 - INF2010
+* Date:  2 Octobre 2017
+* Auteur : Constantin Bouis 1783438 et Axel Templier 1837967
+**************************************************************/
+
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
 public class DoublyLinkedList<AnyType>
 {
     // Un noeud de la liste.
@@ -76,7 +85,11 @@ public class DoublyLinkedList<AnyType>
     private Node<AnyType> getNodeAt(int index)
     {
         Node<AnyType> temporaire = front;
+<<<<<<< HEAD
         for (int i = 0; i < index; i++) 
+=======
+        for (int i = 0; i < index; i++)
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
         	temporaire = temporaire.getNext();
         return temporaire;
     }
@@ -94,10 +107,17 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public void popBack() throws EmptyListException
     {
+<<<<<<< HEAD
         if (empty())  
         	throw new EmptyListException();
         
         if (size() > 1) 
+=======
+        if (empty())
+        	throw new EmptyListException();
+
+        if (size() > 1)
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
         	back = back.getPrev();
         back.setNext(null);
         size--;
@@ -107,6 +127,7 @@ public class DoublyLinkedList<AnyType>
     // Complexité asymptotique: O(1)
     public void popFront() throws EmptyListException
     {
+<<<<<<< HEAD
     	if (empty())  
         	throw new EmptyListException();
     	
@@ -115,13 +136,27 @@ public class DoublyLinkedList<AnyType>
         front.setPrev(null);
         size--;
     	
+=======
+    	if (empty())
+        	throw new EmptyListException();
+
+    	if (size() > 1)
+        	front = front.getNext();
+        front.setPrev(null);
+        size--;
+
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
     }
 
     // Retire l'élément à l'indice donné.
     // Complexité asymptotique: O(n)
     public void removeAt(int index) throws IndexOutOfBoundsException
     {
+<<<<<<< HEAD
     	
+=======
+
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
             if(index < 0 || index >= this.size())
                 throw new IndexOutOfBoundsException();
 
@@ -130,14 +165,21 @@ public class DoublyLinkedList<AnyType>
             if(temporaire != back)
             	temporaire.getNext().setPrev(temporaire.getPrev());
             else {
+<<<<<<< HEAD
                 if(size() > 1)                         
                     back = back.getPrev();  
                 back.setNext(null);               
+=======
+                if(size() > 1)
+                    back = back.getPrev();
+                back.setNext(null);
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
             }
 
             if(temporaire != front)
             	temporaire.getPrev().setNext(temporaire.getNext());
             else {
+<<<<<<< HEAD
                 if(size() > 1)                        
                     front = front.getNext();  
                 front.setPrev(null);               
@@ -145,6 +187,15 @@ public class DoublyLinkedList<AnyType>
 
             this.size--;
     
+=======
+                if(size() > 1)
+                    front = front.getNext();
+                front.setPrev(null);
+            }
+
+            this.size--;
+
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
     }
 
     // Ajoute un élément à la fin de la liste.
@@ -157,7 +208,11 @@ public class DoublyLinkedList<AnyType>
         	front = newNode;
         else
         	back.getPrev().setNext(back);
+<<<<<<< HEAD
         	
+=======
+
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
         size++;
     }
 
@@ -171,7 +226,11 @@ public class DoublyLinkedList<AnyType>
         	back = newNode;
         else
         	front.getNext().setPrev(front);
+<<<<<<< HEAD
         	
+=======
+
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
         size++;
     }
 
@@ -183,10 +242,17 @@ public class DoublyLinkedList<AnyType>
             throw new IndexOutOfBoundsException();
 
         if(index == 0)
+<<<<<<< HEAD
             pushFront(item);                
         else if(index == this.size())
             pushBack(item);                 
         else {                              
+=======
+            pushFront(item);
+        else if(index == this.size())
+            pushBack(item);
+        else {
+>>>>>>> e2f7126286e9e129c5f52268e88c85c2a28e0a7e
             Node<AnyType> temporaire = getNodeAt(index);
             Node<AnyType> newNode = new Node<AnyType>(item, temporaire.prev, temporaire);
             newNode.getPrev().setNext(newNode);
