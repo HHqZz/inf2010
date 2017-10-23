@@ -1,4 +1,4 @@
-
+package probleme1 ;
 import java.util.ArrayList;
 
 import java.util.Random;
@@ -99,7 +99,7 @@ public class HashFunctions
       for(int i=0, nbElements = 10; i<40; ++i, nbElements += 10)
       {
          pfhash.SetArray( randomIntegers( nbElements ) );
-         System.out.println( nbElements + "\t" + pfhash.Size() );
+         System.out.println( nbElements + "\t" + pfhash.Size()  );
       }
 
    }

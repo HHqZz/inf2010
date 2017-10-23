@@ -1,4 +1,4 @@
-
+package probleme1;
 import java.util.ArrayList;
 import java.util.Random;
 

@@ -8,6 +8,8 @@
  */
 
 
+package probleme2 ;
+
 // QuadraticProbing Hash table class
 //
 // CONSTRUCTION: an approximate initial size or default of 101
@@ -29,6 +31,8 @@
 
 public class DoubleHashingTable<AnyType>
 {
+    private int R = 5 ;
+
     /**
      * Construct the hash table.
      */
@@ -56,6 +60,7 @@ public class DoubleHashingTable<AnyType>
         // Insert x
         int currentPos = findPos( x );
         array[ currentPos ] = new HashEntry<AnyType>( x, true );
+        currentSize++;
 
         // Rehash; see Section 5.5
         if( ++currentSize > array.length / 2 )
@@ -100,6 +105,35 @@ public class DoubleHashingTable<AnyType>
 
         return currentPos;
     }
+
+    private int getKey(AnyType x) {
+        int offset = 0;
+        int key = myhash(x);
+        int longueur = array.length;
+
+        while (array[key] != null && !array[key].element.equals(x)) {
+            int hash2 = (R - (x.hashCode() % R));
+            key = (myhash(x) + offset * hash2) % longueur;
+            offset++;
+        }
+        return key;
+    }
+
+    public AnyType get(AnyType x) {
+
+        if(array[getKey(x)] == null) {
+            return null;
+        }
+        return array[getKey(x)].element;
+    }
+
+
+    public int nbElement() {
+        return currentSize;
+
+
+    }
+
 
     /**
      * Remove all occurences of x from the hash table.

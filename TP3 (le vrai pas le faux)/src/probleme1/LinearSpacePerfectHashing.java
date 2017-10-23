@@ -1,4 +1,4 @@
-//package probleme1;
+package probleme1;
 //import QuadraticSpacePerfectHashing;
 
 import org.omg.CORBA.Any;
@@ -45,16 +45,13 @@ public class LinearSpacePerfectHashing<AnyType>
 		if(array.size() == 1)
 		{
 			a = b = 0;
-			 key = getKey(array.get(0));
-			 subKey= data[key].getKey(array.get(0));
-
-			data[key].items[subKey] = array.get(0) ;
+			data[0] = new QuadraticSpacePerfectHashing<AnyType>(array);
 			return;
 		}
 		data = new QuadraticSpacePerfectHashing[array.size()] ; // principal
 
 		for(int i = 0; i< array.size(); i++) {
-			for (int j = 0; i < array.size(); j++) {
+			for (int j = 0; j < array.size(); j++) {
 				key = getKey(array.get(j));
 			}
 			// Sous tableau, pour chaque index de data
@@ -64,12 +61,16 @@ public class LinearSpacePerfectHashing<AnyType>
 
 	public int Size()
 	{
-		if( data == null ) return 0;
+		if( data == null )
+			return 0;
 
 		int size = 0;
+
 		for(int i=0; i<data.length; ++i)
 		{
-			size += (data[i] == null ? 1 : data[i].Size());
+			if(data[i]==null)
+				size++;
+			else size+= data[i].Size();
 		}
 		return size;
 	}
@@ -83,7 +84,7 @@ public class LinearSpacePerfectHashing<AnyType>
 		* dans la table
 		*/
 		if(data[index]!=null) // Si lindexe existe deja
-			return true ;		// Cest que la table contient deja la cle
+			return true ;		// Cest que la table contient deja la cle donc return true
 		else return false ;
 
 
@@ -96,14 +97,32 @@ public class LinearSpacePerfectHashing<AnyType>
 	}
 	
 	public boolean containsValue (AnyType x) {
-		return data[getKey(x)].containsValue(x) ;
+
+		/* Gerons les differents cas pour la taille du tableau
+		*	vide
+		*	a=0
+		*	key inexistante
+	    */
+
+		if(Size() == 0)	//cas table vide
+			return false;
+
+		if(a == 0) // a de lequation index = ((a*key+b)%p)%m : cas index 0
+			return data[0].containsValue(x);
+
+		int key = getKey(x);
+
+		if(data[key] == null) //cas ou la cle nexiste pas
+			return false;
+
+		return data[key].containsValue(x); //cas normal
 
 	}
 	
-	public void remove (AnyType x) { // A REVOIR
+	public void remove (AnyType x) { //
 
 		int m = data.length;
-		int index = ((a*x.hashCode()+b)%p)%m;
+		int index = ((a*x.hashCode()+b)%p)%m; // Fonction de hashing
 		data[index].remove(x) ;
 		
 	}
