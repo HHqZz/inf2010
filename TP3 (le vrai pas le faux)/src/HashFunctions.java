@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+
 import java.util.Random;
 
 public class HashFunctions 
@@ -53,8 +54,8 @@ public class HashFunctions
 
       System.out.println();
    
-      /**
-       * Exercice 2
+
+       //* Exercice 2
     
       // On cree un LinearSpacePerfectHashing et insere les memes donnees
       System.out.println( "LinearSpacePerfectHashing:");
@@ -89,8 +90,8 @@ public class HashFunctions
       System.out.println();
       
       
-      /**
-       * Confirmation des resultats de Exercice 2
+
+      // * Confirmation des resultats de Exercice 2
      
       // Effectues quelques tests aleatoires pour verifier les proprietes de taille
       pfhash = new LinearSpacePerfectHashing<Integer>();
@@ -100,12 +101,13 @@ public class HashFunctions
          pfhash.SetArray( randomIntegers( nbElements ) );
          System.out.println( nbElements + "\t" + pfhash.Size() );
       }
-         */
+
    }
    
-   /**
-    * Question 1
-      */
+
+    //** Question 1
+
+
    public static ArrayList<Integer> randomIntegers(int length)
    {
 	  Random generator = new Random( System.nanoTime() );
@@ -117,9 +119,9 @@ public class HashFunctions
     	  }
     	  listeAleatoire.add(newInteger);
       }
-	   return null;
+	   return listeAleatoire;
    }
- 
+
 }
 
 
