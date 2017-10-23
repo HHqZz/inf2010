@@ -57,13 +57,13 @@ public class QuadraticSpacePerfectHashing<AnyType>
 
 	public void remove (AnyType x) {
 		
-		if(containsValue(x)){
+		if(containsValue(x)){			
 			items[getKey(x)] = null ;
 		}
 	}
 
 	public int getKey (AnyType x) {
-		return ( ( a*x.hashCode() + b ) % p ) % Size();
+		return ( ( a*x.hashCode() + b ) % p ) % Size(); // On recoit l'index en prenant le hashCode de la valeur passer en parametre.
 	}
 
 	@SuppressWarnings("unchecked")
@@ -71,21 +71,21 @@ public class QuadraticSpacePerfectHashing<AnyType>
 	{
 		Random generator = new Random( System.nanoTime() );
 		int m =  array.size()*array.size();
-		if(array == null || array.size() == 0)
+		if(array == null || array.size() == 0)			// Si l'array ne contient aucun ellement.
 		{
-			a = 0;
+			a = 0;										// On initialise les valeurs de "a" et "b" a 0
 			b = 0;
-			items = null;
+			items = null;								// Et le tableau Items est null 
 			return;
 		}
-		if(array.size() == 1)
+		if(array.size() == 1)							// Si l'array contient seulement un element
 		{
-			a = b = 0;
-			items = (AnyType[]) new Object[1];
-			items[getKey(array.get(0))]= array.get(0);		
+			a = b = 0;									// On initialise les valeurs de "a" et "b" a 0
+			items = (AnyType[]) new Object[1];			// On initialise le tableau items a une capacite de 1.
+			items[getKey(array.get(0))]= array.get(0);	// Om met l'unique valeur dans le tableau. 		
 			return;
 		}		
-		items = (AnyType[]) new Object[m];
+		items = (AnyType[]) new Object[m];				// Si Array contient plusieur valeurs. On l'initialise a une capacitée de m.
 		makeEmpty();
 		int index;
 		AnyType element;
@@ -93,20 +93,20 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		
 		do {
 			
-	    	a = generator.nextInt((p-1)+1);
+	    	a = generator.nextInt((p-1)+1);				// On genere des valeurs pour a et b.
 	        b = generator.nextInt(p);
 	        
-	        for(int i = 0; i < array.size(); i++) {
+	        for(int i = 0; i < array.size(); i++) {		// On parcour tout le array.
 	        	element = array.get(i);
 	        	index =  ( ( a*element.hashCode() + b ) % p ) % m;
-	        	if(items[index] == null)
-	        		items[index] = element;
+	        	if(items[index] == null)				// Si il n'y a pas d'element dans le tabeau (a la position de l'indexe)
+	        		items[index] = element;				// alors on y met le nouvel element.
 	        	else
-	        		colision = true;
+	        		colision = true;					// Sinon il y a colision
 	        	
 	        }
 	             
-		}while(colision);
+		}while(colision);								// On effecue cette boucle temps qu'il y a une colision.
     	 
 
       }
@@ -117,21 +117,21 @@ public class QuadraticSpacePerfectHashing<AnyType>
 		boolean premierElement = true;
 		for( int i = 0 ; i< Size() ; i++) {
 			if(containsKey(i)) {
-				if(premierElement) {
+				if(premierElement) {					
 					resultat += "(" + String.valueOf(getKey(items[i])) + ", " + String.valueOf(items[i])+ " )";
 					premierElement = false;
 				}
-				resultat += "(" + String.valueOf(getKey(items[i])) + "; " + String.valueOf(items[i])+ "), ";
+				resultat += ", (" + String.valueOf(getKey(items[i])) + "; " + String.valueOf(items[i])+ ")";
 			}
 				
 		}
-		resultat += ".";
+		resultat += ".";								// On finit l'affichage par un point.
 		return resultat; 
 	}
 
 	public void makeEmpty () {
-		for( int i =0 ; i< Size(); i++){
-			items[i] = null;
+		for( int i =0 ; i< Size(); i++){				// On parcourt tout le tableau.
+			items[i] = null;							// On supprime chaque element.
 		}
 
    	}
