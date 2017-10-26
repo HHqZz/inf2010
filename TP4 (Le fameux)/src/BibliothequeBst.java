@@ -2,7 +2,8 @@ import java.util.ArrayList;
 
 // Implémentation de l'interface IBibliotheque
 // à l'aide d'un arbre de recherche binaire.
-public class BibliothequeBst implements IBibliotheque
+
+/*public class BibliothequeBst implements IBibliotheque
 {
     private BST<String> livres = new AvlTree<String>();
 
@@ -38,3 +39,4 @@ public class BibliothequeBst implements IBibliotheque
         // À compléter
     }
 }
+*/

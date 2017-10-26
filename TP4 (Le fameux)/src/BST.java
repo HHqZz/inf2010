@@ -37,7 +37,7 @@ public class BST<T extends Comparable<T>>
 
     protected int getHeight(Node<T> node)
     {
-        // À compléter
+
         if(node == null)
             return -1 ;  // on decremente pour  la comparaison
         else
@@ -47,14 +47,14 @@ public class BST<T extends Comparable<T>>
 
 	public void insert(T elem) { root = insert(root, elem); }
 
-	//FOnction qui permet dajouter un element dans larbre
+	//Fonction qui permet dajouter un element dans larbre
 	private Node<T> insert(Node<T> node, T elem)
     {
 
         if(node == null) {  // Si larbre est vide
             return new Node<T>(elem); // On cree une racine
         }
-        int compareResult = elem.compareTo(node.val); elem-node.val
+        int compareResult = elem.compareTo(node.val);
         if(compareResult<0 ){
             node.left=insert( node.left, elem);
         }
@@ -82,7 +82,7 @@ public class BST<T extends Comparable<T>>
         }
         if(node == null)
             return false ;
-
+        else return false;
     }
 
     public ArrayList<T> traversePreOrder()
@@ -94,7 +94,12 @@ public class BST<T extends Comparable<T>>
 
 	private void traversePreOrder(Node<T> node, ArrayList<T> list)
 	{
-        // À compléter
+        if (node == null)
+            return;
+            list.add(node.val);
+	        traversePreOrder(node.left,list);
+            traversePreOrder(node.right,list);
+
 	}
 
     public ArrayList<T> traversePostOrder()
@@ -106,8 +111,9 @@ public class BST<T extends Comparable<T>>
 
 	private void traversePostOrder(Node<T> node, ArrayList<T> list)
 	{
-        // À compléter
-	}
+
+
+    }
 
     public ArrayList<T> traverseInOrder()
     {

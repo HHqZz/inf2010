@@ -1,5 +1,5 @@
 import com.sun.corba.se.impl.orb.ParserTable;
-
+/*
 public class BibliothequeMain
 {
     public static void main(String[] args)
@@ -119,3 +119,4 @@ public class BibliothequeMain
         System.out.println("Tous les tests de BibliothequeBst ont passé!");
     }
 }
+*/
