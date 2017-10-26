@@ -96,9 +96,10 @@ public class BST<T extends Comparable<T>>
 	{
         if (node == null)
             return;
-            list.add(node.val);
-	        traversePreOrder(node.left,list);
-            traversePreOrder(node.right,list);
+
+        list.add(node.val);
+        traversePreOrder(node.left,list);
+        traversePreOrder(node.right,list);
 
 	}
 
@@ -111,6 +112,13 @@ public class BST<T extends Comparable<T>>
 
 	private void traversePostOrder(Node<T> node, ArrayList<T> list)
 	{
+        if(node == null)
+            return;
+        traversePostOrder(node.left,list);
+        traversePostOrder(node.right,list);
+        list.add(node.val);
+
+
 
 
     }
@@ -124,7 +132,11 @@ public class BST<T extends Comparable<T>>
 
     private void traverseInOrder(Node<T> node, ArrayList<T> list)
     {
-        // À compléter
+        if(node== null)
+            return;
+        traverseInOrder(node.left,list);
+        list.add(node.val);
+        traverseInOrder(node.right,list);
     }
 
     public ArrayList<T> traverseReverseOrder()
@@ -136,7 +148,11 @@ public class BST<T extends Comparable<T>>
 
     private void traverseReverseOrder(Node<T> node, ArrayList<T> list)
     {
-        // À compléter
+        if(node == null)
+            return;
+        traverseReverseOrder(node.right,list);
+        list.add(node.val);
+        traverseReverseOrder(node.left,list);
     }
 
     public ArrayList<T> traverseLevelOrder()
