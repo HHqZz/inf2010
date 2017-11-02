@@ -1,9 +1,10 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 // Implémentation de l'interface IBibliotheque
 // à l'aide d'un arbre de recherche binaire.
 
-/*public class BibliothequeBst implements IBibliotheque
+public class BibliothequeBst implements IBibliotheque
 {
     private BST<String> livres = new AvlTree<String>();
 
@@ -12,13 +13,15 @@ import java.util.ArrayList;
     public void ajouterLivre(String livre)
     {
         // À compléter
+        livres.insert(livre);
+
     }
 
     // Complexité: O(log(n))
     // Explication:
     public boolean contientLivre(String livre)
     {
-        // À compléter
+        return livres.contains(livre);
     }
 
     // Complexité: O(n)
@@ -28,6 +31,17 @@ import java.util.ArrayList;
     public String afficherLivresAlpha()
     {
         // À compléter
+
+        String tempStr="" ; // resultat final
+        ArrayList<String> tempListlivres ;  // liste pour stocker larbre dans un certain ordre
+        tempListlivres = livres.traverseInOrder();  // On met chacun des elements de la bibliotheques dans dans la liste en suviant un certain ordre
+
+    for( int i = 0 ; i< tempListlivres.size() ; i++ ){
+            tempStr+= tempListlivres.get(i) + "\n";
+        }
+        return tempStr;
+
+       //return livres.traverseInOrder().toString();
     }
 
     // Complexité: O(n)
@@ -37,6 +51,14 @@ import java.util.ArrayList;
     public String afficherLivresAlphaInverse()
     {
         // À compléter
+        String tempStr="" ; // resultat final
+        ArrayList<String> tempListlivres ;  // liste pour stocker larbre dans un certain ordre
+        tempListlivres = livres.traverseReverseOrder();  // On met chacun des elements de la bibliotheques dans dans la liste en suviant un certain ordre
+
+        for( int i = 0 ; i< tempListlivres.size() ; i++ ){
+        tempStr+= tempListlivres.get(i) + "\n";
+        }
+        return tempStr;
     }
 }
-*/
+
