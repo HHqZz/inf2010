@@ -23,6 +23,8 @@ public class BST<T extends Comparable<T>>
 
     public boolean isValid() { return isValid(root); }
 
+
+    // Permet de savoir si un noeud est valide ou non
     private boolean isValid(Node<T> node)
     {
         if (node == null) {
@@ -70,17 +72,17 @@ public class BST<T extends Comparable<T>>
     private boolean contains(Node<T> node, T elem)
     {
         int compareResult = elem.compareTo(node.val);
-        if(compareResult == 0)
+        if(compareResult == 0)									// Si les valeures comparer sont les memes
             return true ;
-        if(compareResult<0 ){
+        if(compareResult<0 ){									// la valeur du noeud est plus grand que `l element
             if(!(node.left== null))
                return contains( node.left, elem);
         }
-        if(compareResult >0) {
+        if(compareResult >0) {									// la valeur du noeud est plus petite que `l element
             if (!(node.right == null))
                 return contains(node.right, elem);
         }
-        if(node == null)
+        if(node == null)										// Si larbre est vide
             return false ;
         else return false;
     }
@@ -94,7 +96,7 @@ public class BST<T extends Comparable<T>>
 
 	private void traversePreOrder(Node<T> node, ArrayList<T> list)
 	{
-        if (node == null)
+        if (node == null)										// Si larbre est vide
             return;
 
         list.add(node.val);
@@ -112,7 +114,7 @@ public class BST<T extends Comparable<T>>
 
 	private void traversePostOrder(Node<T> node, ArrayList<T> list)
 	{
-        if(node == null)
+        if(node == null)										// Si larbre est vide
             return;
         traversePostOrder(node.left,list);
         traversePostOrder(node.right,list);
@@ -132,7 +134,7 @@ public class BST<T extends Comparable<T>>
 
     private void traverseInOrder(Node<T> node, ArrayList<T> list)
     {
-        if(node== null)
+        if(node== null)											  // Si larbre est vide
             return;
         traverseInOrder(node.left,list);
         list.add(node.val);
@@ -148,7 +150,7 @@ public class BST<T extends Comparable<T>>
 
     private void traverseReverseOrder(Node<T> node, ArrayList<T> list)
     {
-        if(node == null)
+        if(node == null)											// Si larbre est vide
             return;
         traverseReverseOrder(node.right,list);
         list.add(node.val);
@@ -163,6 +165,8 @@ public class BST<T extends Comparable<T>>
 
         while (!queue.isEmpty()) {
             // À compléter
+
+
         }
 
 		return list;

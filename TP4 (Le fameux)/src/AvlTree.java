@@ -26,27 +26,27 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
             return new Node<T>(elem); // On cree une racine
         }
         int compareResult = elem.compareTo(node.val);
-        if(compareResult<0 ){
+        if(compareResult<0 ){	// Si l'element est plus petit que la valeur du noeud
             node.left=insert( node.left, elem);
             if(getHeight(node.left) - getHeight(node.right) == 2)
-                if(elem.compareTo(node.left.val) < 0)
+                if(elem.compareTo(node.left.val) < 0) // Si l`element est plus petit que la valeur du noeuds de gauche
                     node = balanceLeftLeft(node);
-                else
+                else									// Si l`element est plus grand que la valeur du noeuds de gauche
                     node = balanceLeftRight(node);
         }
-        if(compareResult >0){
+        if(compareResult >0){ // Si l'element est plus grand que la valeur du noeud
             node.right=insert(node.right, elem);
             if(getHeight(node.right) - getHeight(node.left) == 2)
-                if(elem.compareTo(node.right.val) > 0)
+                if(elem.compareTo(node.right.val) > 0) // Si l`element est plus grand que la valeur du noeuds de droite
                     node = balanceRightRight(node);
-                else
+                else									// Si l`element est plus petit que la valeur du noeuds de droite
                     node = balanceRightLeft(node);
             }
         else ; // pas de doublons
 
         return node;
     }
-
+	//balancement droite-droite
     private Node<T> balanceRightRight(Node<T> node)
     {
         Node<T> node2 = node.right ;
@@ -58,13 +58,13 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
         return node2;
 
     }
-
+	//balancement droite-gauche
     private Node<T> balanceRightLeft(Node<T> node)
     {
         node.right = balanceLeftLeft(node.right);
         return balanceRightRight(node);
     }
-
+	//balancement gauche-gauche
     private Node<T> balanceLeftLeft(Node<T> node)
     {
         Node<T> node2 = node.left ;
@@ -75,7 +75,7 @@ public class AvlTree<T extends Comparable<T>> extends BST<T>
 
         return node2;
     }
-
+	//balancement gauche-droite
     private Node<T> balanceLeftRight(Node<T> node)
     {
         node.left = balanceRightRight(node.left);
