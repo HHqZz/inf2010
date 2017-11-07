@@ -23,8 +23,6 @@ public class BST<T extends Comparable<T>>
 
     public boolean isValid() { return isValid(root); }
 
-
-    // Permet de savoir si un noeud est valide ou non
     private boolean isValid(Node<T> node)
     {
         if (node == null) {
@@ -164,9 +162,14 @@ public class BST<T extends Comparable<T>>
         queue.add(root);
 
         while (!queue.isEmpty()) {
-            // À compléter
-
-
+            Node<T> newElement = queue.poll();
+			if(newElement != null){
+				list.add(newElement.val);
+				if(newElement.left != null)
+					queue.add(newElement.left);
+				if(newElement.right != null)
+					queue.add(newElement.right);
+			}
         }
 
 		return list;

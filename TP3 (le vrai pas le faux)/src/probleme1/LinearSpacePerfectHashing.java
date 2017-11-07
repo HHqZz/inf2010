@@ -31,7 +31,7 @@ public class LinearSpacePerfectHashing<AnyType>
 	}
 
 	@SuppressWarnings("unchecked")
-	private void AllocateMemory(ArrayList<AnyType> array)
+	/*private void AllocateMemory(ArrayList<AnyType> array)
 	{
 		Random generator = new Random( System.nanoTime() );
 		int key ;
@@ -57,8 +57,61 @@ public class LinearSpacePerfectHashing<AnyType>
 			// Sous tableau, pour chaque index de data
 			data[i] = new QuadraticSpacePerfectHashing<AnyType>(new ArrayList<AnyType>(array.size()));
 		}
+	}*/
+	
+	
+	private void AllocateMemory(ArrayList<AnyType> array) {
+		Random generator = new Random( System.nanoTime() );
+
+		if(array == null || array.size() == 0) {
+			return;
+		}
+
+		//Tableau de taille m = n .
+		int m = array.size();
+		this.data = new QuadraticSpacePerfectHashing[m];		//Tableau de taille m = n.
+		this.makeEmpty();
+
+		if(array.size() == 1) {
+			this.a = this.b = 0;
+			this.data[0] = new QuadraticSpacePerfectHashing<>(array);
+			return;
+		}
+
+		//Bornes pour max et min de a.
+		int max = this.p - 1;
+		int min = 1;
+		this.a = generator.nextInt(max + 1 - min) + min;    	//Génération d'un nombre se situant dans l'intervalle [1 , p - 1] .
+
+		//Bornes pour min et max de b.
+		max = this.p - 1;
+		min = 0;
+		this.b = generator.nextInt(max + 1 - min) + min;    	//Génération d'un nombre se situant dans l'intervalle [0 , p - 1] .
+
+		//Déclaration des variables utiles à l'intérieur de la boucle suivante.
+		int key;
+		AnyType element, elementTmp;
+		ArrayList<AnyType> tmpArray = new ArrayList<>();
+
+		for(int i  = 0 ; i < m ; i++) {
+			element = array.get(i);					//On récupère l'élément à la position i du array.
+			key = this.getKey(element);				//On va chercher la clé pour l'élément.
+			if(!containsKey(key)) {					//Si la clé n'est pas déjà présente dans le HashTable, on l'ajoute.
+				tmpArray.clear();
+				tmpArray.add(element);
+				for(int j = i + 1 ; j < m ; j++) {	//Récupération de tous les éléments du array qui ont la même clé que celle ci-haut.
+					elementTmp = array.get(j);
+					int indexTmp = this.getKey(elementTmp);
+					if(indexTmp == key)				//Si la clé est la même,
+						tmpArray.add(elementTmp);	//on l'ajoute au tableau temporaire.
+				}
+				this.data[key] = new QuadraticSpacePerfectHashing<>(tmpArray); //À la position de clé, on insère le tableau temporaire.
+			}
+		}
 	}
 
+	
+	
 	public int Size()
 	{
 		if( data == null )
