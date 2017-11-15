@@ -134,17 +134,26 @@ public class Node {
         //
         return null;
     }
-    
-    public ArrayList<Integer> getElementsSorted() {
-        ArrayList<Integer> listeTrie = getElementsSorted();
 
-        listeTrie.add(this.getVal());
-        minIndex(this.getEnfants());
+    //Methode qui retourne une arraylist contenant les valeurs de larbre non triees
+    private ArrayList<Integer> fillArray(ArrayList liste){
 
+        for(int i=0 ; i<this.enfants.size() ; i++){ // pour chaque enfant du noeud courant
+            liste.add(this.enfants.get(i).getVal()); // on les ajoute a la liste
+            this.enfants.get(i).fillArray(liste);   // et on rappelle la fonction sur chacun d'eux
 
-
-
+        }
+        return liste;
     }
+
+    //Renvoie une liste de noeud triee en ordre croissant
+    public ArrayList<Integer> getElementsSorted() {
+        ArrayList<Integer> listeTriee = new ArrayList<Integer>(); //nouvelle liste pour accueillir les elements tries
+        fillArray(listeTriee); // on remplit la liste avec les noeuds de larbre
+        Collections.sort(listeTriee); // trie la liste dentier en ordre croissant
+        return listeTriee; // renvoie la list triee
+    }
+
 
 
     // Retourne une liste qui contient les valeurs tries des enfants dun noeud
