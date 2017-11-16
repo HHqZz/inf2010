@@ -129,9 +129,20 @@ public class Node {
 
         }
     }
-    
+
+
+    // Fonction qui permet de trouver un noeud contenant la valeur passee en parametre
     public Node findValue(int valeur) {
-        //
+
+        for(int i=0 ; i<this.enfants.size() ; i++){
+            if(this.valeur==valeur)
+                return this;
+            if(this.getEnfants().get(i).valeur==valeur)
+                return this.getEnfants().get(i);
+            this.getEnfants().get(i).findValue(valeur);// on rapelle la fonction sur chacun des enfants
+        }
+
+
         return null;
     }
 
