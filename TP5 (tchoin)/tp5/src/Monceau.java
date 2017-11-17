@@ -61,13 +61,13 @@ public class Monceau {
 
     }
 
-
+    
     public void insert(int val) {
-        Node newTree = new Node(val); // on cree un arbre bin a partir de la valeur en parametre
+    Node newTree = new Node(val); // on cree un arbre bin a partir de la valeur en parametre
 
-        Monceau newMonceau = new Monceau(); // on cree un monceau
-        newMonceau.arbres.add(newTree);     // on lui passe larbre cree
-        this.fusion(newMonceau); // on fusionne larbre cree avec le monceau courant
+    Monceau newMonceau = new Monceau(); // on cree un monceau
+    newMonceau.arbres.add(newTree);     // on lui passe larbre cree
+    this.fusion(newMonceau); // on fusionne larbre cree avec le monceau courant
     }
 
     public boolean delete (int val) {
