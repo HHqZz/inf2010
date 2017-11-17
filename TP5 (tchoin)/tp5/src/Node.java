@@ -64,27 +64,24 @@ public class Node {
     public Node fusion(Node autre) throws DifferentOrderTrees {
 
         if(this.ordre != autre.ordre)   // sils ne sont pas du meme ordre
-             throw new DifferentOrderTrees(); //  on lance l'exception
+            throw new DifferentOrderTrees(); //  on lance l'exception
 
-        if(parent == null) {// si larbe courant est vide
-            if(autre.parent == null)
-            {
-                return null;
+        if(parent == null && autre.parent == null) {// si larbe courant est vide
+            if (valeur < autre.valeur){  // On compare les deux arbres
+                enfants.add(autre);
+                autre.parent = this;
+                ordre++;
+                return this;
             }
-            return autre ;// On retourne le nouvel arbre qui est le noeud passe en parametre
-        }
-        else
-            if(autre.getVal()<this.getVal()){ // On compare les deux arbres
-                autre.addEnfant(autre);      // le plus grand devient l'enfant du deuxieme arbre
+
+            else{
+                autre.addEnfant(autre);
                 autre.ordre++;
                 return autre;
             }
-            else {
-                this.addEnfant(this); // Dans le cas dune egalite alors le deuxieme arbre devient
-                this.ordre++;
-                return this;
-
-            }
+        }
+        else
+            return null;
 
 
     }
@@ -92,10 +89,10 @@ public class Node {
     // Permet dechanger deux noeuds par valeur (si relation parent enfant)
     private void moveUp() {
 
-        int tempVal = parent.getVal(); // on copie le parent
+        int tempVal = this.parent.getVal(); // coppie du parent
 
-        if(parent!= null){
-            parent.valeur = this.getVal() ;
+        if(this.parent!= null){
+            this.parent.valeur = this.getVal() ;
             this.valeur = tempVal ;
         }
 
@@ -123,15 +120,28 @@ public class Node {
         System.out.println(tabulation);
         System.out.println(this.getVal());
 
-        for(int i = 0 ; i< this.getEnfants().size() ; i++) { // Pour tous les enfants du noeud courant
-            this.getEnfants().get(i).print(tabulation); // on rappelle print
+        for(int i = 0 ; i< this.enfants.size(); i++) { // Pour tous les enfants du noeud courant
+            Node enfant = enfants.get(i);
+
             System.out.println("\n");
+            enfant.print("  ");
 
         }
     }
-    
+
+
+    // Fonction qui permet de trouver un noeud contenant la valeur passee en parametre
     public Node findValue(int valeur) {
-        //
+
+        for(int i=0 ; i<this.enfants.size() ; i++){
+            if(this.valeur==valeur)
+                return this;
+            if(this.getEnfants().get(i).valeur==valeur)
+                return this.getEnfants().get(i);
+            this.getEnfants().get(i).findValue(valeur);// on rapelle la fonction sur chacun des enfants
+        }
+
+
         return null;
     }
 
