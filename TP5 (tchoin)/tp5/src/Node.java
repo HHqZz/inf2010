@@ -64,6 +64,9 @@ public class Node {
     // permet de fusionner deux arbres de meme ordre
     public Node fusion(Node autre) throws DifferentOrderTrees {
 
+        if(this.ordre != autre.ordre)   // sils ne sont pas du meme ordre
+            throw new DifferentOrderTrees(); //  on lance l'exception
+
         // si this est plus grand que parametre alors bug
         // prendre la valeur de this et la comparer avec celle en parametre
         // si this est plus gfrand que param alors on rappelle la fonction mais a lenvers
@@ -71,8 +74,7 @@ public class Node {
             return autre.fusion(this);
         }
 
-        if(this.ordre != autre.ordre)   // sils ne sont pas du meme ordre
-            throw new DifferentOrderTrees(); //  on lance l'exception
+
 
         if(parent == null && autre.parent == null) {// si larbe courant est vide
             if (valeur < autre.valeur){  // On compare les deux arbres
@@ -97,7 +99,7 @@ public class Node {
     // Permet dechanger deux noeuds par valeur (si relation parent enfant)
     private void moveUp() {
 
-        int tempVal = this.parent.getVal(); // coppie du parent
+        int tempVal = this.parent.getVal(); // copie du parent
 
         if(this.parent!= null){
             this.parent.valeur = this.getVal() ;
@@ -125,14 +127,15 @@ public class Node {
 
    public void print(String tabulation) {
         // on affiche la valeur du noeud courant
+       if(this == null)
+           System.out.println("Arbre vide");
+
         System.out.print(tabulation);
         System.out.print(this.getVal());
 
         for(int i = 0 ; i< this.enfants.size(); i++) { // Pour tous les enfants du noeud courant
             Node enfant = enfants.get(i);
             enfant.print(tabulation+ "\t");
-
-
 
         }
        System.out.println("\n");
@@ -143,16 +146,22 @@ public class Node {
     // Fonction qui permet de trouver un noeud contenant la valeur passee en parametre
     public Node findValue(int valeur) {
 
-        for(Node node : this.getEnfants()) {
-            if (this.valeur == valeur) {
-                return this;
-            }
-            if(node.valeur==valeur)
-                return node;
+        ArrayList<Node> listNode= new ArrayList<>();
+        listNode.add(this);
+        fillArrayNode(listNode);
 
-            else return node.findValue(valeur);
+        if(this.valeur == valeur) {
+            System.out.println("Valeur presente dans larbre binomial"+this.getVal());
+            return this;
         }
-       return this;
+        for(Node node : listNode){
+            if(node.valeur==valeur) {
+                System.out.println("Valeur presente dans larbre binomial"+node.getVal());
+                return node;
+            }
+        }
+        System.out.println("Valeur absente dans larbre");
+        return null;
     }
 
     //Methode qui retourne une arraylist contenant les valeurs de larbre non triees
@@ -166,11 +175,22 @@ public class Node {
         return liste;
     }
 
+    //Methode qui retourne une arraylist contenant les noeud de larbre
+    private ArrayList<Node> fillArrayNode(ArrayList liste){
+
+        for(int i=0 ; i<this.enfants.size() ; i++){ // pour chaque enfant du noeud courant
+            liste.add(this.enfants.get(i)); // on les ajoute a la liste
+            this.enfants.get(i).fillArrayNode(liste);   // et on rappelle la fonction sur chacun d'eux
+
+        }
+        return liste;
+    }
+
     //Renvoie une liste de noeud triee en ordre croissant
     public ArrayList<Integer> getElementsSorted() {
         ArrayList<Integer> listeTriee = new ArrayList<Integer>(); //nouvelle liste pour accueillir les elements tries
         listeTriee.add(this.valeur); // on ajoute la racine de larbre
-        fillArray(listeTriee); // on remplit la liste avec les noeuds de larbre
+        fillArray(listeTriee); // on remplit la liste avec les noeuds de larbre sans la racine qui y est deja
         Collections.sort(listeTriee); // trie la liste dentier en ordre croissant
         return listeTriee; // renvoie la list triee
     }
