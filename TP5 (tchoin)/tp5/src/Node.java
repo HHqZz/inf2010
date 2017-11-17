@@ -115,19 +115,21 @@ public class Node {
 
     }
 
-    public void print(String tabulation) {
+   public void print(String tabulation) {
         // on affiche la valeur du noeud courant
-        System.out.println(tabulation);
-        System.out.println(this.getVal());
+        System.out.print(tabulation);
+        System.out.print(this.getVal());
 
         for(int i = 0 ; i< this.enfants.size(); i++) { // Pour tous les enfants du noeud courant
             Node enfant = enfants.get(i);
+            enfant.print(tabulation+ "\t");
 
-            System.out.println("\n");
-            enfant.print("  ");
+
 
         }
+       System.out.println("\n");
     }
+
 
 
     // Fonction qui permet de trouver un noeud contenant la valeur passee en parametre
@@ -159,6 +161,7 @@ public class Node {
     //Renvoie une liste de noeud triee en ordre croissant
     public ArrayList<Integer> getElementsSorted() {
         ArrayList<Integer> listeTriee = new ArrayList<Integer>(); //nouvelle liste pour accueillir les elements tries
+        listeTriee.add(this.valeur); // on ajoute la racine de larbre
         fillArray(listeTriee); // on remplit la liste avec les noeuds de larbre
         Collections.sort(listeTriee); // trie la liste dentier en ordre croissant
         return listeTriee; // renvoie la list triee
