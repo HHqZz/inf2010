@@ -1,6 +1,7 @@
 
 import com.sun.xml.internal.bind.AnyTypeAdapter;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -62,6 +63,13 @@ public class Node {
 
     // permet de fusionner deux arbres de meme ordre
     public Node fusion(Node autre) throws DifferentOrderTrees {
+
+        // si this est plus grand que parametre alors bug
+        // prendre la valeur de this et la comparer avec celle en parametre
+        // si this est plus gfrand que param alors on rappelle la fonction mais a lenvers
+        if(this.valeur> autre.valeur){
+            return autre.fusion(this);
+        }
 
         if(this.ordre != autre.ordre)   // sils ne sont pas du meme ordre
             throw new DifferentOrderTrees(); //  on lance l'exception
@@ -135,16 +143,16 @@ public class Node {
     // Fonction qui permet de trouver un noeud contenant la valeur passee en parametre
     public Node findValue(int valeur) {
 
-        for(int i=0 ; i<this.enfants.size() ; i++){
-            if(this.valeur==valeur)
+        for(Node node : this.getEnfants()) {
+            if (this.valeur == valeur) {
                 return this;
-            if(this.getEnfants().get(i).valeur==valeur)
-                return this.getEnfants().get(i);
-            this.getEnfants().get(i).findValue(valeur);// on rapelle la fonction sur chacun des enfants
+            }
+            if(node.valeur==valeur)
+                return node;
+
+            else return node.findValue(valeur);
         }
-
-
-        return null;
+       return this;
     }
 
     //Methode qui retourne une arraylist contenant les valeurs de larbre non triees
