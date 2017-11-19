@@ -14,20 +14,21 @@ public class Monceau {
         // On cree des indexs pour larbre courant et larbre en parametre
         int indexCourant = 0;
         int indexAutreMonceau = 0;
-
+        int indexChange = 0;
         // on cree un arbre temporaire
         ArrayList<Node> tempTree = new ArrayList<>();
 
 
         while ((indexCourant < this.arbres.size()) || (indexAutreMonceau < autre.arbres.size())) { // Tant qu on a pas parcouru les deux arbres entierement ( pour ne pas oublier delements durant la fusion )
-            if (indexCourant == arbres.size()) {    // Si lindex de larbre courant arrive a la fin de larbre courant
+            if (indexAutreMonceau == autre.arbres.size()) { // si on arrive a la fin du parcours de larbre en parametre
+                tempTree.add(arbres.get(indexCourant)); // on ajoute a larbre fuisonne les nodes de larbre courant
+                indexCourant = indexCourant + 1; // on incremente lindex de larbre courant
+              }
+			else if (indexCourant == arbres.size()) {    // Si lindex de larbre courant arrive a la fin de larbre courant
                 tempTree.add(autre.arbres.get(indexAutreMonceau));  //On ajoute a larbre fusionne les nodes de larbre en parametre
                 indexAutreMonceau = indexAutreMonceau + 1;    // On incremente lindice de larbre en parametre
             } 
-			else if (indexAutreMonceau == autre.arbres.size()) { // si on arrive a la fin du parcours de larbre en parametre
-                tempTree.add(arbres.get(indexCourant)); // on ajoute a larbre fuisonne les nodes de larbre courant
-                indexCourant = indexCourant + 1; // on incremente lindex de larbre courant
-            } 
+      
 			else if (this.arbres.get(indexCourant).ordre <= autre.arbres.get(indexAutreMonceau).ordre) { // On
                 tempTree.add(arbres.get(indexCourant));
                 indexCourant = indexCourant + 1;
@@ -38,22 +39,23 @@ public class Monceau {
             }
         }
 
-        int indexChange = 0;
+        
         while (indexChange < tempTree.size() - 1) {
             Node temp = tempTree.get(indexChange);
             Node compareValue = tempTree.get(indexChange + 1);
-            if (temp.ordre > compareValue.ordre) {
-                tempTree.set(indexChange, compareValue);
-                tempTree.set(indexChange + 1, temp);
-            } else if (temp.ordre == compareValue.ordre) {
+            if (temp.ordre == compareValue.ordre) {
                 try {
                     tempTree.set(indexChange, temp.fusion(compareValue));
                 } catch (DifferentOrderTrees e) {
                 }
                 tempTree.remove(indexChange + 1);
-            } else {
+                
+            } else if (temp.ordre > compareValue.ordre) {
+                tempTree.set(indexChange, compareValue);
+                tempTree.set(indexChange + 1, temp);
+            } else 
                 indexChange++;
-            }
+         
         }
 
         arbres = tempTree;
@@ -78,7 +80,7 @@ public class Monceau {
                 Monceau monceauTemporaire = new Monceau();
                 monceauTemporaire.arbres = arbreTemporaire;
                 arbres.remove(arbres.get(i));
-                fusion(monceauTemporaire);
+                this.fusion(monceauTemporaire);
                 return true;
 
 
