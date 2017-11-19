@@ -23,14 +23,16 @@ public class Monceau {
             if (indexCourant == arbres.size()) {    // Si lindex de larbre courant arrive a la fin de larbre courant
                 tempTree.add(autre.arbres.get(indexAutreMonceau));  //On ajoute a larbre fusionne les nodes de larbre en parametre
                 indexAutreMonceau = indexAutreMonceau + 1;    // On incremente lindice de larbre en parametre
-            } else if (indexAutreMonceau == autre.arbres.size()) { // si on arrive a la fin du parcours de larbre en parametre
+            } 
+			else if (indexAutreMonceau == autre.arbres.size()) { // si on arrive a la fin du parcours de larbre en parametre
                 tempTree.add(arbres.get(indexCourant)); // on ajoute a larbre fuisonne les nodes de larbre courant
                 indexCourant = indexCourant + 1; // on incremente lindex de larbre courant
-            } else if (this.arbres.get(indexCourant).ordre <= autre.arbres.get(indexAutreMonceau).ordre) { // On
+            } 
+			else if (this.arbres.get(indexCourant).ordre <= autre.arbres.get(indexAutreMonceau).ordre) { // On
                 tempTree.add(arbres.get(indexCourant));
                 indexCourant = indexCourant + 1;
-            } else {
-
+            } 
+			else {
                 tempTree.add(autre.arbres.get(indexAutreMonceau));
                 indexAutreMonceau++;
             }
