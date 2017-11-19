@@ -72,24 +72,26 @@ public class Monceau {
         this.fusion(newMonceau); // on fusionne larbre cree avec le monceau courant
     }
 
-    public boolean delete(int val) {
+    public boolean delete (int val) {
 
-        for (int i = 0; i < arbres.size(); i++) {
-            if (arbres.get(i).findValue(val) != null) {
-                ArrayList<Node> arbreTemporaire = arbres.get(i).findValue(val).delete();
-                Monceau monceauTemporaire = new Monceau();
-                monceauTemporaire.arbres = arbreTemporaire;
-                arbres.remove(arbres.get(i));
-                this.fusion(monceauTemporaire);
-                return true;
+        boolean isDeleted = false ;
+        for(int node = 0; node < arbres.size(); node++){
+            Monceau monceauTemp = new Monceau();
 
-
+            if(this.arbres.get(node).findValue(val) == null)
+            { /* ne fait rien*/}
+            else {
+                ArrayList<Node> arbreTemp = this.arbres.get(node).findValue(val).delete(); // recupere la liste de noeud a delete
+                monceauTemp.arbres = arbreTemp; // on stocke dans larbre temporaire les noeud a supprimer
+                this.arbres.remove(arbres.get(node)); // retire de la liste le noeud a supprimer
+                this.fusion(monceauTemp); // on fusionne les deux monceaux
+                node = 0; // Reinitialise la boucle en cas de doublons et +
+                isDeleted = true; // On a delete au moins une fois
             }
         }
-
-
-        return false;
+        return isDeleted;
     }
+
 
     public void print() {
         for (int i = 0; i < arbres.size(); i++) {

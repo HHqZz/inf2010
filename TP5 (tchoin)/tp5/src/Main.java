@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args)
     {
-
+        /*
         System.out.println("**********Debut des tests pour NODE.java*********");
         //Creation des NODE
         System.out.println("*******TEST Creation des nodes*******");
@@ -99,7 +99,7 @@ public class Main {
         System.out.println("************FIN TEST FINDVALUE ************");
         // Fin test findvalue NODE.java
 
-
+*/
 
 /************************************MONCEAU******************************************/
 
@@ -117,8 +117,10 @@ public class Main {
         monceau.insert(0);
         monceau.insert(1);
         monceau.insert(4);
+        monceau.insert(7);
         monceau.insert(84);
         monceau.insert(7);
+        monceau.insert(12);
         System.out.println("Fin Des insertions");
 
         System.out.println("Test findValue ");
@@ -131,9 +133,9 @@ public class Main {
        System.out.println("**Debut test delete Monceau**");
         //monceau.arbres = noeud1.findValue(3).delete();
         //
-
+        monceau.delete(7);
         monceau.print();
-        Monceau monceau2 = new Monceau();
+      /*  Monceau monceau2 = new Monceau();
         try {
             monceau2.arbres.add(noeud5.fusion(noeud6));
         } catch (DifferentOrderTrees e) {
@@ -177,7 +179,7 @@ public class Main {
         monceau.delete(4);
         System.out.println("DONE");
         monceau.print();
-
+*/
     }
 
 
